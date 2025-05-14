@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: hello
-          image: 613477150601.dkr.ecr.ap-southeast-1.amazonaws.com/microservice-demo-stack/hello:
+          image: 613477150601.dkr.ecr.ap-southeast-1.amazonaws.com/microservice-demo-stack/hello:0.0.1
           imagePullPolicy: Always
           securityContext:
             runAsNonRoot: true
@@ -38,4 +38,5 @@ spec:
     - name: "8080"
       port: 8080
       targetPort: 8080
+  selector:
     service: hello

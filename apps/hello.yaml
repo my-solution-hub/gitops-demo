@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: hello
+  name: hello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: hello
+  template:
+    metadata:
+      labels:
+        service: hello
+      # annotations:
+      #   instrumentation.opentelemetry.io/inject-java: "true"
+    spec:
+      containers:
+        - name: hello
+          image: 613477150601.dkr.ecr.ap-southeast-1.amazonaws.com/microservice-demo-stack/hello:
+          imagePullPolicy: Always
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: hello
+  name: hello
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+    service: hello

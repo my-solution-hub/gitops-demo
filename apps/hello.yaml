@@ -33,6 +33,7 @@ metadata:
   labels:
     service: hello
   name: hello
+  namespace: default
 spec:
   ports:
     - name: "8080"
